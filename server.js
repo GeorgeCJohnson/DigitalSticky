@@ -47,3 +47,25 @@ app.post(`./routes/api-routes.js`, (req, res) => {
 
   res.json(note);
 });
+
+//Routes | Delete requests
+app.delete(`./routes/api-routes.js/:id`, (req, res) => {
+  const idToDelete = parseInt(req.params.id);
+
+  readFileAsync(`./db/db.json`, `utf8`).then((data) => {
+    const notes = [].concat(JSON.parse(data));
+    const newNotesData = [];
+
+    for (let i = 0; i < notes.length; i++) {
+      if (idToDelete !== notes[i].id) {
+        newNotesData.push(notes[i]);
+      }
+    }
+
+    writeFileAsync(`./db/db.json`, JSON.stringify(newNotesData)).then(() => {
+      console.log(`Note deleted!`);
+    });
+  });
+
+  res.send(`Note deleted!`);
+});
