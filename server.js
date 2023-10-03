@@ -21,3 +21,11 @@ app.use(express.json());
 //Middleware
 
 app.use(express.static("public"));
+
+//Routes
+app.get(`./routes/api-routes.js`, (req, res) => {
+  readFileAsync(`./db/db.json`, `utf8`).then((data) => {
+    notes = [].concat(JSON.parse(data));
+    res.json(notes);
+  });
+});
