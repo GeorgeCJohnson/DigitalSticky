@@ -22,10 +22,28 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-//Routes
+//Routes | Get requests
 app.get(`./routes/api-routes.js`, (req, res) => {
   readFileAsync(`./db/db.json`, `utf8`).then((data) => {
     notes = [].concat(JSON.parse(data));
     res.json(notes);
   });
+});
+
+//Routes | Post requests
+app.post(`./routes/api-routes.js`, (req, res) => {
+  const note = req.body;
+
+  readFileAsync(`./db/db.json`, `utf8`).then((data) => {
+    const notes = [].concat(JSON.parse(data));
+    note.id = notes.length + 1;
+    notes.push(note);
+    return notes;
+  });
+
+  writeFileAsync(`./db/db.json`, JSON.stringify(notes)).then(() => {
+    console.log(`Note added!`)
+  });
+
+  res.json(note);
 });
