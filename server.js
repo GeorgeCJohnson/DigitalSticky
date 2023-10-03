@@ -69,3 +69,21 @@ app.delete(`./routes/api-routes.js/:id`, (req, res) => {
 
   res.send(`Note deleted!`);
 });
+
+// HTML Routes
+app.get(`.notes`, (req, res) => {
+  res.sendFile(path.join(__dirname, `./public/notes.html`));
+});
+
+app.get(`*`, (req, res) => {
+  res.sendFile(path.join(__dirname, `./public/index.html`));
+});
+
+app.get(`/`) => {
+    res.sendFile(path.join(__dirname, `./public/index.html`));
+    };
+
+//Start Server
+app.listen(PORT, () => {
+  console.log(`App listening on PORT: ${PORT}`);
+});
