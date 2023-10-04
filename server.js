@@ -5,6 +5,7 @@ const path = require(`node:path`);
 const fs = require(`fs`);
 const util = require(`./utils/utils.js`);
 
+<script src="./utils/utils.js"></script> 
 // Asynchronous Processes
 
 const readFileAsync = util.promisify(fs.readFile);
