@@ -3,7 +3,7 @@
 const express = require(`express`);
 const path = require(`path`);
 const fs = require(`fs`);
-const util = require(`../utils`);
+const util = require(`/node_modules/utils`);
 
 // Asynchronous Processes
 
