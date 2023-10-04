@@ -20,10 +20,10 @@ app.use(express.json());
 
 //Middleware
 
-app.use(express.static("public"));
+app.use(express.static("./public"));
 
 //Routes | Get requests
-app.get(`./routes/api-routes.js`, (req, res) => {
+app.get(`/api/notes`, (req, res) => {
   readFileAsync(`./db/db.json`, `utf8`).then((data) => {
     notes = [].concat(JSON.parse(data));
     res.json(notes);
@@ -31,7 +31,7 @@ app.get(`./routes/api-routes.js`, (req, res) => {
 });
 
 //Routes | Post requests
-app.post(`./routes/api-routes.js`, (req, res) => {
+app.post(`/api/notes`, (req, res) => {
   const note = req.body;
 
   readFileAsync(`./db/db.json`, `utf8`).then((data) => {
@@ -49,7 +49,7 @@ app.post(`./routes/api-routes.js`, (req, res) => {
 });
 
 //Routes | Delete requests
-app.delete(`./routes/api-routes.js/:id`, (req, res) => {
+app.delete(`/api/notes/:id`, (req, res) => {
   const idToDelete = parseInt(req.params.id);
 
   readFileAsync(`./db/db.json`, `utf8`).then((data) => {
@@ -61,7 +61,7 @@ app.delete(`./routes/api-routes.js/:id`, (req, res) => {
         newNotesData.push(notes[i]);
       }
     }
-
+    
     writeFileAsync(`./db/db.json`, JSON.stringify(newNotesData)).then(() => {
       console.log(`Note deleted!`);
     });
@@ -71,7 +71,7 @@ app.delete(`./routes/api-routes.js/:id`, (req, res) => {
 });
 
 // HTML Routes
-app.get(`.notes`, (req, res) => {
+app.get(`/notes`, (req, res) => {
   res.sendFile(path.join(__dirname, `./public/notes.html`));
 });
 
