@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(express.static("./public"));
 
 //Routes | Get requests
-app.get(`/api/notes`, (req, res) => {
+app.get(`/notes`, (req, res) => {
   readFileAsync(`./db/db.json`, `utf8`).then((data) => {
     notes = [].concat(JSON.parse(data));
     res.json(notes);
@@ -31,7 +31,7 @@ app.get(`/api/notes`, (req, res) => {
 });
 
 //Routes | Post requests
-app.post(`/api/notes`, (req, res) => {
+app.post(`notes`, (req, res) => {
   const note = req.body;
 
   readFileAsync(`./db/db.json`, `utf8`).then((data) => {
@@ -49,7 +49,7 @@ app.post(`/api/notes`, (req, res) => {
 });
 
 //Routes | Delete requests
-app.delete(`/api/notes/:id`, (req, res) => {
+app.delete(`notes/:id`, (req, res) => {
   const idToDelete = parseInt(req.params.id);
 
   readFileAsync(`./db/db.json`, `utf8`).then((data) => {
