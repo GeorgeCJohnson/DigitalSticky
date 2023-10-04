@@ -3,12 +3,12 @@
 const express = require(`express`);
 const path = require(`path`);
 const fs = require(`fs`);
-const utils = require(`./utils`);
+const util = require(`util`);
 
 // Asynchronous Processes
 
-const readFileAsync = utils.promisify(fs.readFile);
-const writeFileAsync = utils.promisify(fs.writeFile);
+const readFileAsync = util.promisify(fs.readFile);
+const writeFileAsync = util.promisify(fs.writeFile);
 
 //Set up Server
 
@@ -87,3 +87,5 @@ app.get(`/`, (req, res) => {
 app.listen(PORT, () => {
   console.log(`App listening on PORT: ${PORT}`);
 });
+
+module.exports = app;
