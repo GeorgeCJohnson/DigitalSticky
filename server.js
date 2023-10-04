@@ -3,7 +3,7 @@
 const express = require(`express`);
 const path = require(`path`);
 const fs = require(`fs`);
-const util = require(`util`);
+const util = require(`utils`);
 
 // Asynchronous Processes
 
@@ -41,7 +41,7 @@ app.post(`/api/notes`, (req, res) => {
     return notes;
   });
 
-  writeFileAsync(`./db/db.json`, JSON.stringify(notes)).then(() => {
+  writeFileAsync(`./db/db.json`, JSON.stringify(note)).then(() => {
     console.log(`Note added!`)
   });
 
